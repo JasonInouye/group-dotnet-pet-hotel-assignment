@@ -15,13 +15,15 @@ namespace pet_hotel.Controllers
     public class PetsController : ControllerBase
     {
         private readonly ApplicationContext _context;
-        public PetsController(ApplicationContext context) {
+        public PetsController(ApplicationContext context)
+        {
             _context = context;
         }
 
         // get all pets
         [HttpGet]
-        public IEnumerable<Pet> GetPets() {
+        public IEnumerable<Pet> GetPets()
+        {
             return _context.Pets
 
             .Include(pet => pet.ownedBy);
@@ -50,7 +52,7 @@ namespace pet_hotel.Controllers
 
         //     return new List<Pet>{ newPet1, newPet2};
         // }
-    
+
         //get pet owner by id
         [HttpGet("{id}")]
         public ActionResult<Pet> GetById(int id)
@@ -58,7 +60,8 @@ namespace pet_hotel.Controllers
             Pet pet = _context.Pets
                 .SingleOrDefault(pet => pet.id == id);
 
-            if(pet == null){
+            if (pet == null)
+            {
                 return NotFound();
             }
 
@@ -66,12 +69,23 @@ namespace pet_hotel.Controllers
         }
 
         [HttpPost]
-        public Pet Post(Pet pet) {
+        public Pet Post(Pet pet)
+        {
             _context.Add(pet);
             _context.SaveChanges();
 
             return pet;
-            
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            Pet pet = _context.Pets.Find(id);
+
+            _context.Pets.Remove(pet);
+
+            // ...and save the changes to the database
+            _context.SaveChanges(); ;
         }
     }
 }
