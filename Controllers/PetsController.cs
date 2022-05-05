@@ -22,7 +22,8 @@ namespace pet_hotel.Controllers
 
         // get all pets
         [HttpGet]
-        public IEnumerable<Pet> GetPets() {
+        public IEnumerable<Pet> GetPets()
+        {
             return _context.Pets
 
             .Include(pet => pet.ownedBy);
@@ -66,26 +67,28 @@ namespace pet_hotel.Controllers
             return pet;
         }
 
-        // // /api/pets/:id/checkin
-        // [HttpPut("{id}/checkin")]
-        // public Pet ChangeCheckedInAt(int id, Date checkedInAt)
-        // {
+        [HttpPut("{id}/checkin")]
+        public Pet Put (int id)
+        {
 
-        //     pet.checkedInAt = pet.checkedInAt;
+            Pet pet = _context.Pets     
+                .SingleOrDefault(pet => pet.id == id);
 
-        //     _context.Update(pet.checkedInAt);
+            pet.checkedInAt = DateTime.Now;
 
-        //     _context.SaveChanges();
+            _context.Update(pet);
 
-        //     return pet;
-        // }
+            _context.SaveChanges();
+
+            return pet;
+        }
 
         // // /api/pets/:id/checkout
         // [HttpPut("{id}")]
         // public Pet Put (int id, Pet pet)
         // {
 
-        //     pet.id = id;
+        //     pet.id = id;`
 
         //     _context.Update(pet);
 
@@ -103,11 +106,32 @@ namespace pet_hotel.Controllers
             Pet pet = _context.Pets
                 .SingleOrDefault(pet => pet.id == id);
 
-            if(pet == null){
+            if (pet == null)
+            {
                 return NotFound();
             }
 
             return pet;
+        }
+
+        [HttpPost]
+        public Pet Post(Pet pet)
+        {
+            _context.Add(pet);
+            _context.SaveChanges();
+
+            return pet;
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            Pet pet = _context.Pets.Find(id);
+
+            _context.Pets.Remove(pet);
+
+            // ...and save the changes to the database
+            _context.SaveChanges(); ;
         }
     }
 }
