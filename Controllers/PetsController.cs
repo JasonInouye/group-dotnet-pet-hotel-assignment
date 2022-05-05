@@ -64,5 +64,14 @@ namespace pet_hotel.Controllers
 
             return pet;
         }
+
+        [HttpPost]
+        public Pet Post(Pet pet) {
+            _context.Add(pet);
+            _context.SaveChanges();
+
+            return pet;
+            
+        }
     }
 }
