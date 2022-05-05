@@ -20,12 +20,12 @@ namespace pet_hotel.Controllers
             _context = context;
         }
 
-        // This is just a stub for GET / to prevent any weird frontend errors that 
-        // occur when the route is missing in this controller
+        // get all pets
         [HttpGet]
-        public IEnumerable<Pet> GetPets()
-        {
-            return new List<Pet>();
+        public IEnumerable<Pet> GetPets() {
+            return _context.Pets
+
+            .Include(pet => pet.ownedBy);
         }
 
         // [HttpGet]
@@ -95,5 +95,19 @@ namespace pet_hotel.Controllers
         // }
 
 
+    
+        //get pet owner by id
+        [HttpGet("{id}")]
+        public ActionResult<Pet> GetById(int id)
+        {
+            Pet pet = _context.Pets
+                .SingleOrDefault(pet => pet.id == id);
+
+            if(pet == null){
+                return NotFound();
+            }
+
+            return pet;
+        }
     }
 }
