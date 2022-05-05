@@ -66,33 +66,33 @@ namespace pet_hotel.Controllers
             return pet;
         }
 
-        // /api/pets/:id/checkin
-        [HttpPut("{id}")]
-        public Pet Put (int id, Pet pet)
-        {
+        // // /api/pets/:id/checkin
+        // [HttpPut("{id}/checkin")]
+        // public Pet Put(int id, Pet pet)
+        // {
 
-            pet.id = id;
+        //     pet.id = id;
 
-            _context.Update(pet);
+        //     _context.Update(pet);
 
-            _context.SaveChanges();
+        //     _context.SaveChanges();
 
-            return pet;
-        }
+        //     return pet;
+        // }
 
-        // /api/pets/:id/checkout
-        [HttpPut("{id}")]
-        public Pet Put (int id, Pet pet)
-        {
+        // // /api/pets/:id/checkout
+        // [HttpPut("{id}")]
+        // public Pet Put (int id, Pet pet)
+        // {
 
-            pet.id = id;
+        //     pet.id = id;
 
-            _context.Update(pet);
+        //     _context.Update(pet);
 
-            _context.SaveChanges();
+        //     _context.SaveChanges();
 
-            return pet;
-        }
+        //     return pet;
+        // }
 
 
     }
