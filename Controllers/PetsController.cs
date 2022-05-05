@@ -68,12 +68,12 @@ namespace pet_hotel.Controllers
 
         // // /api/pets/:id/checkin
         // [HttpPut("{id}/checkin")]
-        // public Pet Put(int id, Pet pet)
+        // public Pet ChangeCheckedInAt(int id, Date checkedInAt)
         // {
 
-        //     pet.id = id;
+        //     pet.checkedInAt = pet.checkedInAt;
 
-        //     _context.Update(pet);
+        //     _context.Update(pet.checkedInAt);
 
         //     _context.SaveChanges();
 
