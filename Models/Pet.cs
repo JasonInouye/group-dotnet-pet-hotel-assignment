@@ -28,10 +28,10 @@ namespace pet_hotel
 
         public Nullable<DateTime> checkedInAt {get; set;}
 
-        [ForeignKey("ownedBy")]
+        [ForeignKey("petOwner")]
         public int petOwnerid {get; set;}
 
-        public PetOwner ownedBy {get; set;}
+        public PetOwner petOwner {get; set;}
     }
 }
 
