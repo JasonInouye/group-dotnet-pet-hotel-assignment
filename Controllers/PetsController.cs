@@ -53,6 +53,56 @@ namespace pet_hotel.Controllers
         //     return new List<Pet>{ newPet1, newPet2};
         // }
 
+        // /api/pets/:id
+        [HttpPut("{id}")]
+        public Pet Put (int id, Pet pet)
+        {
+
+            pet.id = id;
+
+            _context.Update(pet);
+
+            _context.SaveChanges();
+
+            return pet;
+        }
+
+        [HttpPut("{id}/checkin")]
+        public Pet SetCheckin (int id)
+        {
+
+            Pet pet = _context.Pets     
+                .SingleOrDefault(pet => pet.id == id);
+
+            pet.checkedInAt = DateTime.Now;
+
+            _context.Update(pet);
+
+            _context.SaveChanges();
+
+            return pet;
+        }
+
+        [HttpPut("{id}/checkout")]
+        public Pet SetCheckOut (int id)
+        {
+
+            Pet pet = _context.Pets     
+                .SingleOrDefault(pet => pet.id == id);
+
+            pet.checkedInAt = null;
+
+            _context.Update(pet);
+
+            _context.SaveChanges();
+
+            return pet;
+        }
+
+
+
+
+    
         //get pet owner by id
         [HttpGet("{id}")]
         public ActionResult<Pet> GetById(int id)
