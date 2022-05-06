@@ -68,7 +68,7 @@ namespace pet_hotel.Controllers
         }
 
         [HttpPut("{id}/checkin")]
-        public Pet Put (int id)
+        public Pet SetCheckin (int id)
         {
 
             Pet pet = _context.Pets     
@@ -83,19 +83,23 @@ namespace pet_hotel.Controllers
             return pet;
         }
 
-        // // /api/pets/:id/checkout
-        // [HttpPut("{id}")]
-        // public Pet Put (int id, Pet pet)
-        // {
+        [HttpPut("{id}/checkout")]
+        public Pet SetCheckOut (int id)
+        {
 
-        //     pet.id = id;`
+            Pet pet = _context.Pets     
+                .SingleOrDefault(pet => pet.id == id);
 
-        //     _context.Update(pet);
+            pet.checkedInAt = null;
 
-        //     _context.SaveChanges();
+            _context.Update(pet);
 
-        //     return pet;
-        // }
+            _context.SaveChanges();
+
+            return pet;
+        }
+
+
 
 
     
